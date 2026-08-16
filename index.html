@@ -5,145 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>SmartPocket — គ្រប់គ្រងហិរញ្ញវត្ថុ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Khmer+Moul:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Khmer+Moul:wght@400;700;900&family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-container">
-    <!-- Background Orbs -->
+  <div class="app-container" id="appContainer">
+    <!-- Animated Background Orbs -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
+    <div class="mesh-gradient"></div>
 
     <!-- Header -->
     <header class="app-header">
       <div class="logo-area">
         <div class="logo-icon">💰</div>
-        <h1>SmartPocket</h1>
-        <span class="tagline">គ្រប់គ្រងហិរញ្ញវត្ថុផ្ទាល់ខ្លួន</span>
+        <div class="logo-text">
+          <h1>SmartPocket</h1>
+          <span class="tagline">គ្រប់គ្រងហិរញ្ញវត្ថុផ្ទាល់ខ្លួន</span>
+        </div>
       </div>
     </header>
 
-    <!-- Dashboard Cards -->
-    <section class="dashboard" aria-label="Dashboard">
-      <div class="card-row">
-        <div class="glass-card card-income">
+    <!-- Main Dashboard -->
+    <main class="main-content">
+      <!-- Balance Hero Card -->
+      <section class="hero-card glass-card" aria-label="Current Balance">
+        <span class="hero-label">💵 សល់បច្ចុប្បន្ន</span>
+        <h2 class="hero-amount" id="heroBalance">$180</h2>
+        <div class="currency-tag" id="heroCurrency">USD</div>
+        <div class="balance-bar">
+          <div class="balance-fill" id="heroBalanceFill" style="width:60%"></div>
+        </div>
+        <div class="hero-sub">📈 ចំណូល — ចំណាយ = សល់</div>
+      </section>
+
+      <!-- Income / Expense Row -->
+      <section class="card-row" aria-label="Summary">
+        <div class="glass-card card-income" onclick="filterByCategory('income')">
           <span class="label">💰 ចំណូលសរុប</span>
           <h2 id="totalIncome">$500</h2>
           <span class="currency">USD</span>
         </div>
-        <div class="glass-card card-expense">
+        <div class="glass-card card-expense" onclick="filterByCategory('expense')">
           <span class="label">💸 ចំណាយសរុប</span>
           <h2 id="totalExpense">$320</h2>
           <span class="currency">USD</span>
         </div>
-      </div>
-      <div class="glass-card card-balance main-balance">
-        <span class="label">💵 សល់បច្ចុប្បន្ន</span>
-        <h2 id="balance">$180</h2>
-        <div class="balance-bar">
-          <div class="balance-fill" style="width:60%"></div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Quick Stats -->
-    <section class="quick-stats" aria-label="Expense Summary">
-      <h3>📊 សង្ខេបចំណាយ</h3>
-      <div class="stats-grid" id="statsGrid">
-        <div class="stat-item"><span class="dot food"></span><span class="name">អាហារ</span><span class="amount">$50</span></div>
-        <div class="stat-item"><span class="dot transport"></span><span class="name">ដំណើរ</span><span class="amount">$25</span></div>
-        <div class="stat-item"><span class="dot shopping"></span><span class="name">Shopping</span><span class="amount">$80</span></div>
-        <div class="stat-item"><span class="dot education"></span><span class="name">ការសិក្សា</span><span class="amount">$30</span></div>
-        <div class="stat-item"><span class="dot other"></span><span class="name">ផ្សេងៗ</span><span class="amount">$135</span></div>
-      </div>
-    </section>
+      <!-- Expense Chart -->
+      <section class="chart-section glass-card" aria-label="Expense Chart">
+        <div class="section-header">
+          <h3>📊 ចំណាយតាមប្រភេទ</h3>
+          <span class="chart-percent" id="topCategory">Shopping 25%</span>
+        </div>
+        <div class="chart-bars" id="chartBars">
+          <div class="chart-bar" style="--pct:30%; --color:#10b981;"><span class="bar-label">🍔 អាហារ</span><span class="bar-amount">30%</span></div>
+          <div class="chart-bar" style="--pct:25%; --color:#f59e0b;"><span class="bar-label">🛍️ Shopping</span><span class="bar-amount">25%</span></div>
+          <div class="chart-bar" style="--pct:15%; --color:#3b82f6;"><span class="bar-label">🚌 ដំណើរ</span><span class="bar-amount">15%</span></div>
+          <div class="chart-bar" style="--pct:10%; --color:#8b5cf6;"><span class="bar-label">📚 សិក្សា</span><span class="bar-amount">10%</span></div>
+          <div class="chart-bar" style="--pct:20%; --color:#6366f1;"><span class="bar-label">📎 ផ្សេង</span><span class="bar-amount">20%</span></div>
+        </div>
+      </section>
 
-    <!-- Budget Progress -->
-    <section class="budget-section" aria-label="Monthly Budget">
-      <div class="budget-header">
-        <h3>🎯 ថវិកាប្រចាំខែ</h3>
-        <span class="budget-amount">$300</span>
-      </div>
-      <div class="budget-progress">
-        <div class="budget-fill" id="budgetFill" style="width: 85%"></div>
-      </div>
-      <div class="budget-meta">
-        <span>ប្រើអស់ <strong id="budgetUsed">85%</strong></span>
-        <span class="warning" id="budgetWarning">⚠️ ជិតដល់ថវិកា!</span>
-      </div>
-    </section>
+      <!-- Budget Progress -->
+      <section class="budget-section glass-card" aria-label="Monthly Budget">
+        <div class="budget-header">
+          <h3>🎯 ថវិកាប្រចាំខែ</h3>
+          <span class="budget-amount" id="budgetAmount">$300</span>
+        </div>
+        <div class="budget-progress-wrap">
+          <div class="budget-progress">
+            <div class="budget-fill" id="budgetFill" style="width: 85%"></div>
+          </div>
+          <span class="budget-used-text" id="budgetUsed">85%</span>
+        </div>
+        <div class="budget-meta">
+          <span>ប្រើអស់ <strong id="budgetUsedText">85%</strong></span>
+          <span class="warning" id="budgetWarning">⚠️ ជិតដល់ថវិកា!</span>
+        </div>
+      </section>
 
-    <!-- Transaction List -->
-    <section class="transactions" aria-label="Recent Transactions">
-      <h3>📅 ប្រតិបត្តិការចុងក្រោយ</h3>
-      <div class="transaction-list" id="transactionList">
-        <div class="tx-item income">
-          <div class="tx-icon">💰</div>
-          <div class="tx-info"><h4>ប្រាក់ខែ</h4><span>01 Aug 2026</span></div>
-          <span class="tx-amount">+$500</span>
+      <!-- Transactions -->
+      <section class="transactions" aria-label="Recent Transactions">
+        <div class="section-header">
+          <h3>📅 ប្រតិបត្តិការចុងក្រោយ</h3>
+          <button class="btn-small" onclick="showAddForm('income')">➕</button>
         </div>
-        <div class="tx-item expense">
-          <div class="tx-icon">🍔</div>
-          <div class="tx-info"><h4>អាហារ</h4><span>02 Aug 2026</span></div>
-          <span class="tx-amount">-$50</span>
+        <div class="transaction-list" id="transactionList">
+          <div class="tx-item income" data-type="income">
+            <div class="tx-icon">💰</div>
+            <div class="tx-info"><h4>ប្រាក់ខែ</h4><span>01 Aug 2026</span></div>
+            <span class="tx-amount">+$500</span>
+          </div>
+          <div class="tx-item expense" data-type="expense">
+            <div class="tx-icon">🍔</div>
+            <div class="tx-info"><h4>អាហារ</h4><span>02 Aug 2026</span></div>
+            <span class="tx-amount">-$50</span>
+          </div>
+          <div class="tx-item expense" data-type="expense">
+            <div class="tx-icon">🚌</div>
+            <div class="tx-info"><h4>ដំណើរ</h4><span>03 Aug 2026</span></div>
+            <span class="tx-amount">-$25</span>
+          </div>
+          <div class="tx-item expense" data-type="expense">
+            <div class="tx-icon">🛍️</div>
+            <div class="tx-info"><h4>Shopping</h4><span>04 Aug 2026</span></div>
+            <span class="tx-amount">-$80</span>
+          </div>
+          <div class="tx-item expense" data-type="expense">
+            <div class="tx-icon">📚</div>
+            <div class="tx-info"><h4>ការសិក្សា</h4><span>05 Aug 2026</span></div>
+            <span class="tx-amount">-$30</span>
+          </div>
         </div>
-        <div class="tx-item expense">
-          <div class="tx-icon">🚌</div>
-          <div class="tx-info"><h4>ដំណើរ</h4><span>03 Aug 2026</span></div>
-          <span class="tx-amount">-$25</span>
-        </div>
-        <div class="tx-item expense">
-          <div class="tx-icon">🛍️</div>
-          <div class="tx-info"><h4>Shopping</h4><span>04 Aug 2026</span></div>
-          <span class="tx-amount">-$80</span>
-        </div>
-        <div class="tx-item expense">
-          <div class="tx-icon">📚</div>
-          <div class="tx-info"><h4>ការសិក្សា</h4><span>05 Aug 2026</span></div>
-          <span class="tx-amount">-$30</span>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Search / Filter -->
-    <section class="search-section" aria-label="Search Transactions">
-      <h3>🔎 ស្វែងរក</h3>
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="ស្វែងរកប្រតិបត្តិការ..." oninput="filterTransactions(this.value)">
+      <!-- Search -->
+      <section class="search-section glass-card" aria-label="Search">
+        <h3>🔎 ស្វែងរក</h3>
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="ស្វែងរកប្រតិបត្តិការ..." oninput="filterTransactions(this.value)">
+        </div>
         <div class="search-filters">
-          <button onclick="filterByCategory('all')" class="filter-btn active">ទាំងអស់</button>
-          <button onclick="filterByCategory('income')" class="filter-btn">ចំណូល</button>
-          <button onclick="filterByCategory('expense')" class="filter-btn">ចំណាយ</button>
+          <button onclick="filterByCategory('all')" class="filter-btn active" data-filter="all">ទាំងអស់</button>
+          <button onclick="filterByCategory('income')" class="filter-btn" data-filter="income">ចំណូល</button>
+          <button onclick="filterByCategory('expense')" class="filter-btn" data-filter="expense">ចំណាយ</button>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Currency Selector -->
-    <section class="currency-section" aria-label="Currency Selection">
-      <h3>🌐 រូបិយប័ណ្ណ</h3>
-      <div class="currency-options">
-        <button onclick="setCurrency('USD')" class="currency-btn active" data-currency="USD">🇺🇸 USD ($)</button>
-        <button onclick="setCurrency('KHR')" class="currency-btn" data-currency="KHR">🇰🇭 KHR (៛)</button>
-        <button onclick="setCurrency('THB')" class="currency-btn" data-currency="THB">🇹🇭 THB (฿)</button>
-      </div>
-    </section>
+      <!-- Currency Selector -->
+      <section class="currency-section glass-card" aria-label="Currency">
+        <h3>🌐 រូបិយប័ណ្ណ</h3>
+        <div class="currency-options">
+          <button onclick="setCurrency('USD')" class="currency-btn active" data-currency="USD">🇺🇸 USD ($)</button>
+          <button onclick="setCurrency('KHR')" class="currency-btn" data-currency="KHR">🇰🇭 KHR (៛)</button>
+          <button onclick="setCurrency('THB')" class="currency-btn" data-currency="THB">🇹🇭 THB (฿)</button>
+        </div>
+      </section>
+    </main>
 
-    <!-- Add Transaction Buttons -->
-    <section class="actions" aria-label="Add Transactions">
-      <button class="btn btn-income" onclick="showAddForm('income')">➕ បន្ថែមចំណូល</button>
-      <button class="btn btn-expense" onclick="showAddForm('expense')">➖ បន្ថែមចំណាយ</button>
-    </section>
+    <!-- Floating Action Buttons -->
+    <div class="fab-group">
+      <button class="fab fab-income" onclick="showAddForm('income')" aria-label="Add Income">➕</button>
+      <button class="fab fab-expense" onclick="showAddForm('expense')" aria-label="Add Expense">➖</button>
+    </div>
 
-    <!-- Add Form Modal -->
+    <!-- Modal -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
     <div class="modal" id="addModal" role="dialog" aria-modal="true" aria-label="Add Transaction">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
       <h3 id="modalTitle">បន្ថែមប្រតិបត្តិការ</h3>
       <form onsubmit="submitTransaction(event)">
         <input type="hidden" id="txType" value="">
-        <label>ចំនួន</label>
-        <input type="number" id="txAmount" placeholder="0.00" required>
-        <label>ប្រភេទ</label>
+        <label for="txAmount">ចំនួន</label>
+        <input type="number" id="txAmount" placeholder="0.00" step="0.01" required>
+        <label for="txCategory">ប្រភេទ</label>
         <select id="txCategory">
           <option value="Food">🍔 អាហារ</option>
           <option value="Transport">🚌 ដំណើរ</option>
@@ -153,7 +171,7 @@
           <option value="Bills">💡 វិក័យប័ត្រ</option>
           <option value="Other">📎 ផ្សេងៗ</option>
         </select>
-        <label>កំណត់សម្គាល់</label>
+        <label for="txNote">កំណត់សម្គាល់</label>
         <input type="text" id="txNote" placeholder="ឧទាហរណ៍: អាហារថ្ងៃត្រង់">
         <button type="submit" class="btn btn-submit">💾 រក្សាទុក</button>
       </form>
