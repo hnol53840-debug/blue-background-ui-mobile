@@ -3,247 +3,169 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Blue Background UI - Mobile</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Khmer+Moul&family=Inter:wght@300;400;600;800&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-
-    html, body {
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Inter', 'Khmer Moul', sans-serif;
-      background: linear-gradient(135deg, #001a4a 0%, #003d7a 35%, #005cb8 65%, #0077e6 85%, #0099ff 100%);
-      color: #fff;
-      user-select: none;
-    }
-
-    /* Animated gradient orbs */
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.35;
-      animation: floatOrb 18s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-
-    .orb-1 {
-      width: 420px; height: 420px;
-      background: radial-gradient(circle at 40% 30%, #4fc3f7, #0077e6);
-      top: -100px; left: -80px;
-      animation-delay: 0s;
-    }
-
-    .orb-2 {
-      width: 360px; height: 360px;
-      background: radial-gradient(circle at 60% 50%, #6abfff, #005cb8);
-      bottom: -120px; right: -60px;
-      animation-delay: -6s;
-    }
-
-    .orb-3 {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle at 50% 40%, #9edbff, #0099ff);
-      top: 35%; left: 50%;
-      transform: translate(-50%, -50%);
-      animation-delay: -12s;
-    }
-
-    @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -20px) scale(1.05); }
-      66% { transform: translate(-20px, 25px) scale(0.95); }
-      100% { transform: translate(15px, -10px) scale(1.02); }
-    }
-
-    /* Glass overlay */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(18px) saturate(140%);
-      -webkit-backdrop-filter: blur(18px) saturate(140%);
-      border-radius: 28px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.1);
-    }
-
-    /* Main container */
-    .app {
-      position: relative;
-      z-index: 10;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 50px 28px 36px;
-    }
-
-    /* Header */
-    .header {
-      text-align: center;
-      animation: fadeInDown 1.2s ease-out both;
-    }
-
-    .header h1 {
-      font-size: 2.6rem;
-      font-weight: 800;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      background: linear-gradient(180deg, #ffffff, #b3d8ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 2px 20px rgba(255,255,255,0.15);
-    }
-
-    .header .subtitle {
-      margin-top: 10px;
-      font-size: 1rem;
-      color: rgba(255,255,255,0.7);
-      font-weight: 300;
-      letter-spacing: 0.5px;
-    }
-
-    /* Center content */
-    .center-content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-    }
-
-    .hero-icon {
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0077e6, #0099ff, #4fc3f7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 60px rgba(0,119,230,0.45), 0 20px 40px rgba(0,0,0,0.3);
-      animation: pulseGlow 3s ease-in-out infinite;
-      font-size: 3.2rem;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 60px rgba(0,119,230,0.45), 0 20px 40px rgba(0,0,0,0.3); }
-      50% { box-shadow: 0 0 100px rgba(0,119,230,0.7), 0 20px 40px rgba(0,0,0,0.3); }
-    }
-
-    .center-text {
-      text-align: center;
-      animation: fadeInUp 1s ease-out 0.3s both;
-    }
-
-    .center-text h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      letter-spacing: -0.8px;
-      margin-bottom: 8px;
-    }
-
-    .center-text p {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.5;
-      max-width: 260px;
-    }
-
-    /* Action buttons */
-    .actions {
-      display: flex;
-      gap: 16px;
-      animation: fadeInUp 1s ease-out 0.6s both;
-    }
-
-    .btn {
-      padding: 14px 28px;
-      border-radius: 50px;
-      border: none;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #0099ff, #0077e6);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(0,119,230,0.5);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.2);
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    }
-
-    /* Footer */
-    .footer {
-      text-align: center;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.35);
-      animation: fadeInUp 1s ease-out 0.9s both;
-    }
-
-    /* Animations */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  <title>SmartPocket — គ្រប់គ្រងហិរញ្ញវត្ថុ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Khmer+Moul:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+  <div class="app-container">
+    <!-- Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
-  <main class="app" role="main">
-    <header class="header">
-      <h1>ពណ៌ខៀវ<br>ផ្ទៃខាងក្រោយ</h1>
-      <p class="subtitle">Blue Full Screen Mobile UI</p>
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="logo-icon">💰</div>
+        <h1>SmartPocket</h1>
+        <span class="tagline">គ្រប់គ្រងហិរញ្ញវត្ថុផ្ទាល់ខ្លួន</span>
+      </div>
     </header>
 
-    <section class="center-content" aria-label="Hero Content">
-      <div class="hero-icon" aria-hidden="true">🌊</div>
-      <div class="center-text">
-        <h2>ស្វាគមន៍មកកាន់ UI</h2>
-        <p>ការរចនា Full Screen ពណ៌ខៀវសម្រាប់ Mobile ជាមួយ Glassmorphism និង Animation</p>
+    <!-- Dashboard Cards -->
+    <section class="dashboard" aria-label="Dashboard">
+      <div class="card-row">
+        <div class="glass-card card-income">
+          <span class="label">💰 ចំណូលសរុប</span>
+          <h2 id="totalIncome">$500</h2>
+          <span class="currency">USD</span>
+        </div>
+        <div class="glass-card card-expense">
+          <span class="label">💸 ចំណាយសរុប</span>
+          <h2 id="totalExpense">$320</h2>
+          <span class="currency">USD</span>
+        </div>
       </div>
-      <div class="actions">
-        <button class="btn btn-primary" onclick="alert('សូមស្វាគមន៍!')">ចាប់ផ្តើម</button>
-        <button class="btn btn-secondary" onclick="alert('អំពីគម្រោង')">អំពី</button>
+      <div class="glass-card card-balance main-balance">
+        <span class="label">💵 សល់បច្ចុប្បន្ន</span>
+        <h2 id="balance">$180</h2>
+        <div class="balance-bar">
+          <div class="balance-fill" style="width:60%"></div>
+        </div>
       </div>
     </section>
 
-    <footer class="footer">
-      <p>© 2026 Blue Background UI • Full Screen Mobile</p>
+    <!-- Quick Stats -->
+    <section class="quick-stats" aria-label="Expense Summary">
+      <h3>📊 សង្ខេបចំណាយ</h3>
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-item"><span class="dot food"></span><span class="name">អាហារ</span><span class="amount">$50</span></div>
+        <div class="stat-item"><span class="dot transport"></span><span class="name">ដំណើរ</span><span class="amount">$25</span></div>
+        <div class="stat-item"><span class="dot shopping"></span><span class="name">Shopping</span><span class="amount">$80</span></div>
+        <div class="stat-item"><span class="dot education"></span><span class="name">ការសិក្សា</span><span class="amount">$30</span></div>
+        <div class="stat-item"><span class="dot other"></span><span class="name">ផ្សេងៗ</span><span class="amount">$135</span></div>
+      </div>
+    </section>
+
+    <!-- Budget Progress -->
+    <section class="budget-section" aria-label="Monthly Budget">
+      <div class="budget-header">
+        <h3>🎯 ថវិកាប្រចាំខែ</h3>
+        <span class="budget-amount">$300</span>
+      </div>
+      <div class="budget-progress">
+        <div class="budget-fill" id="budgetFill" style="width: 85%"></div>
+      </div>
+      <div class="budget-meta">
+        <span>ប្រើអស់ <strong id="budgetUsed">85%</strong></span>
+        <span class="warning" id="budgetWarning">⚠️ ជិតដល់ថវិកា!</span>
+      </div>
+    </section>
+
+    <!-- Transaction List -->
+    <section class="transactions" aria-label="Recent Transactions">
+      <h3>📅 ប្រតិបត្តិការចុងក្រោយ</h3>
+      <div class="transaction-list" id="transactionList">
+        <div class="tx-item income">
+          <div class="tx-icon">💰</div>
+          <div class="tx-info"><h4>ប្រាក់ខែ</h4><span>01 Aug 2026</span></div>
+          <span class="tx-amount">+$500</span>
+        </div>
+        <div class="tx-item expense">
+          <div class="tx-icon">🍔</div>
+          <div class="tx-info"><h4>អាហារ</h4><span>02 Aug 2026</span></div>
+          <span class="tx-amount">-$50</span>
+        </div>
+        <div class="tx-item expense">
+          <div class="tx-icon">🚌</div>
+          <div class="tx-info"><h4>ដំណើរ</h4><span>03 Aug 2026</span></div>
+          <span class="tx-amount">-$25</span>
+        </div>
+        <div class="tx-item expense">
+          <div class="tx-icon">🛍️</div>
+          <div class="tx-info"><h4>Shopping</h4><span>04 Aug 2026</span></div>
+          <span class="tx-amount">-$80</span>
+        </div>
+        <div class="tx-item expense">
+          <div class="tx-icon">📚</div>
+          <div class="tx-info"><h4>ការសិក្សា</h4><span>05 Aug 2026</span></div>
+          <span class="tx-amount">-$30</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search / Filter -->
+    <section class="search-section" aria-label="Search Transactions">
+      <h3>🔎 ស្វែងរក</h3>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="ស្វែងរកប្រតិបត្តិការ..." oninput="filterTransactions(this.value)">
+        <div class="search-filters">
+          <button onclick="filterByCategory('all')" class="filter-btn active">ទាំងអស់</button>
+          <button onclick="filterByCategory('income')" class="filter-btn">ចំណូល</button>
+          <button onclick="filterByCategory('expense')" class="filter-btn">ចំណាយ</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Currency Selector -->
+    <section class="currency-section" aria-label="Currency Selection">
+      <h3>🌐 រូបិយប័ណ្ណ</h3>
+      <div class="currency-options">
+        <button onclick="setCurrency('USD')" class="currency-btn active" data-currency="USD">🇺🇸 USD ($)</button>
+        <button onclick="setCurrency('KHR')" class="currency-btn" data-currency="KHR">🇰🇭 KHR (៛)</button>
+        <button onclick="setCurrency('THB')" class="currency-btn" data-currency="THB">🇹🇭 THB (฿)</button>
+      </div>
+    </section>
+
+    <!-- Add Transaction Buttons -->
+    <section class="actions" aria-label="Add Transactions">
+      <button class="btn btn-income" onclick="showAddForm('income')">➕ បន្ថែមចំណូល</button>
+      <button class="btn btn-expense" onclick="showAddForm('expense')">➖ បន្ថែមចំណាយ</button>
+    </section>
+
+    <!-- Add Form Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+    <div class="modal" id="addModal" role="dialog" aria-modal="true" aria-label="Add Transaction">
+      <h3 id="modalTitle">បន្ថែមប្រតិបត្តិការ</h3>
+      <form onsubmit="submitTransaction(event)">
+        <input type="hidden" id="txType" value="">
+        <label>ចំនួន</label>
+        <input type="number" id="txAmount" placeholder="0.00" required>
+        <label>ប្រភេទ</label>
+        <select id="txCategory">
+          <option value="Food">🍔 អាហារ</option>
+          <option value="Transport">🚌 ដំណើរ</option>
+          <option value="Shopping">🛍️ Shopping</option>
+          <option value="Education">📚 ការសិក្សា</option>
+          <option value="Entertainment">🎮 កម្សាន្ត</option>
+          <option value="Bills">💡 វិក័យប័ត្រ</option>
+          <option value="Other">📎 ផ្សេងៗ</option>
+        </select>
+        <label>កំណត់សម្គាល់</label>
+        <input type="text" id="txNote" placeholder="ឧទាហរណ៍: អាហារថ្ងៃត្រង់">
+        <button type="submit" class="btn btn-submit">💾 រក្សាទុក</button>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>© 2026 SmartPocket • គ្រប់គ្រងហិរញ្ញវត្ថុផ្ទាល់ខ្លួន</p>
+      <p class="sub">សាមញ្ញ • ងាយប្រើ • មានប្រយោជន៍</p>
     </footer>
-  </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
