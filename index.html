@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Blue Background UI - Mobile</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Khmer+Moul&family=Inter:wght@300;400;600;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Inter', 'Khmer Moul', sans-serif;
+      background: linear-gradient(135deg, #001a4a 0%, #003d7a 35%, #005cb8 65%, #0077e6 85%, #0099ff 100%);
+      color: #fff;
+      user-select: none;
+    }
+
+    /* Animated gradient orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      animation: floatOrb 18s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle at 40% 30%, #4fc3f7, #0077e6);
+      top: -100px; left: -80px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 360px; height: 360px;
+      background: radial-gradient(circle at 60% 50%, #6abfff, #005cb8);
+      bottom: -120px; right: -60px;
+      animation-delay: -6s;
+    }
+
+    .orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle at 50% 40%, #9edbff, #0099ff);
+      top: 35%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -12s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.05); }
+      66% { transform: translate(-20px, 25px) scale(0.95); }
+      100% { transform: translate(15px, -10px) scale(1.02); }
+    }
+
+    /* Glass overlay */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    /* Main container */
+    .app {
+      position: relative;
+      z-index: 10;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 50px 28px 36px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      animation: fadeInDown 1.2s ease-out both;
+    }
+
+    .header h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      background: linear-gradient(180deg, #ffffff, #b3d8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 20px rgba(255,255,255,0.15);
+    }
+
+    .header .subtitle {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    /* Center content */
+    .center-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .hero-icon {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0077e6, #0099ff, #4fc3f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 60px rgba(0,119,230,0.45), 0 20px 40px rgba(0,0,0,0.3);
+      animation: pulseGlow 3s ease-in-out infinite;
+      font-size: 3.2rem;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 60px rgba(0,119,230,0.45), 0 20px 40px rgba(0,0,0,0.3); }
+      50% { box-shadow: 0 0 100px rgba(0,119,230,0.7), 0 20px 40px rgba(0,0,0,0.3); }
+    }
+
+    .center-text {
+      text-align: center;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .center-text h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+    }
+
+    .center-text p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+      max-width: 260px;
+    }
+
+    /* Action buttons */
+    .actions {
+      display: flex;
+      gap: 16px;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0099ff, #0077e6);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0,119,230,0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      animation: fadeInUp 1s ease-out 0.9s both;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <main class="app" role="main">
+    <header class="header">
+      <h1>ពណ៌ខៀវ<br>ផ្ទៃខាងក្រោយ</h1>
+      <p class="subtitle">Blue Full Screen Mobile UI</p>
+    </header>
+
+    <section class="center-content" aria-label="Hero Content">
+      <div class="hero-icon" aria-hidden="true">🌊</div>
+      <div class="center-text">
+        <h2>ស្វាគមន៍មកកាន់ UI</h2>
+        <p>ការរចនា Full Screen ពណ៌ខៀវសម្រាប់ Mobile ជាមួយ Glassmorphism និង Animation</p>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="alert('សូមស្វាគមន៍!')">ចាប់ផ្តើម</button>
+        <button class="btn btn-secondary" onclick="alert('អំពីគម្រោង')">អំពី</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>© 2026 Blue Background UI • Full Screen Mobile</p>
+    </footer>
+  </main>
+</body>
+</html>
